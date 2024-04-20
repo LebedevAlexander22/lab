@@ -1,0 +1,52 @@
+"""Вариант 29.
+Шеснадцатиричные числа, у которых 3 справа цифра равна А, расположенные в порядке убывания. Для каждой такой последовательности максимальное число вывести прописью."""
+spisok=[]
+nums=[]
+maxFound=[]
+a = True
+box=[] #фильтрованные числа
+k=1
+element=" "
+j=0
+bigNum=" "
+dir={'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','a':'десять','b':'одиннадцать','c':'двенадцать','d':'тринадцать','e':'четырнадцать','f':'пятнадцать'}
+with open('text.txt', 'r') as spisok:
+    while a != False :
+        nums=spisok.readlines(1)
+
+        if len(nums)==0:
+            print("файл кончился")
+            a=False
+
+
+        else:
+            nums = nums[0].split()
+            nums.append('ddd')
+            for i in nums:
+                if len(i)>=3 and (i[-3]== 'A' or i[-3]== 'a'):
+                    try:
+                        j=int(i, 16)
+
+                    except ValueError:
+                        None
+
+                    box.append(j)
+                else:
+                    if len(box) != 0:
+                        maxFound.append(box[0])
+                    for i in range(0,len(box)):
+
+                        if i+1 < len(box)  and box[i] > box[i+1]: #находим верную последовательность чисел в порядке убывания
+
+                            maxFound.append(box[i+1])
+                        else:
+                            None
+                    if len(maxFound) !=0:
+                        bigNum=str(hex(max(maxFound))) #находим максимум
+                        maxFound=list((map( lambda x:hex(x),maxFound))) # превращаем десятичные числа в шестинадцеричные
+                        print (maxFound,"\n",) #выводим список
+                        for i in bigNum[2:]: print(dir[i],"\n") # выводим наибольшее число прописью
+                    else:
+                        None
+                    maxFound.clear()
+                    box.clear()
