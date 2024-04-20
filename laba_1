@@ -9,6 +9,7 @@ k=1
 element=" "
 j=0
 bigNum=" "
+ind=0
 dir={'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','a':'десять','b':'одиннадцать','c':'двенадцать','d':'тринадцать','e':'четырнадцать','f':'пятнадцать'}
 with open('text.txt', 'r') as spisok:
     while a != False :
@@ -44,6 +45,8 @@ with open('text.txt', 'r') as spisok:
                     if len(maxFound) !=0:
                         bigNum=str(hex(max(maxFound))) #находим максимум
                         maxFound=list((map( lambda x:hex(x),maxFound))) # превращаем десятичные числа в шестинадцеричные
+                        ind +=1
+                        print("Последовательность № ",ind)
                         print (maxFound,"\n",) #выводим список
                         for i in bigNum[2:]: print(dir[i],"\n") # выводим наибольшее число прописью
                     else:
